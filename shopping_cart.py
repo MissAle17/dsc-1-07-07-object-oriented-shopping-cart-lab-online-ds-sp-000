@@ -35,30 +35,34 @@ class ShoppingCart:
     def mean_item_price(self):
         return (self.total/len(self.items))
     
-    def median_item_price(self):
-        prices = [self._items(item, "price") for item in self.items]
-        prices.sort()
-        return self.find_median(prices)
-
     def find_median(self, list_of_prices):
-        length = len(list_of_prices)
-        if (length%2 == 0):
-            index1 = int(length/2)
+        if (len(list_of_prices)%2 == 0):
+            index1 = int((len(list_of_prices))/2)
             index2 = mid_one - 1
             median = (list_of_prices[index1] + list_of_prices[index2])/2
             return median
         else:
-            index3 = int(length/2)  
+            index3 = int((len(list_of_prices))/2)  
             return list_of_prices[index3]
-                          
- #  mean_item_price and median_item_price  the mean is the average price per item and to find the median we must do three things:
 
-#First put all numbers in our list in ascending order (smallest to greatest)
-#Then check to see if there is an odd number of elements in our list. If so, the middle number is the median
-#Finally, if there is an even number of elements in the list, the median will be the average or mean of the two center elements (e.g. given the list [1,2,3,4] the elements 2 and 3 are the two center elements and the median would be (2 + 3)/2 or 2.5).
+    def find_item(self, item, key):
+        return item[key]
     
+    def median_item_price(self):
+        prices = [self.find_item(item, "price") for item in self.items]
+        prices.sort()
+        return self.find_median(prices)
     
+    def apply_discount(self):
+        if self.employee_discount:
+            discount_amt = self.employee_discount/100
+            total_discount = self.total * (1 - discount_amt)
+            return total_discount
+        else:
+            return print("Sorry, there is no discount to apply to your cart :(")
     
+#           if self.employee_discount:
+ #           discount = self.employee_discount/100
+##            return disc_total Now, let's define an instance method called apply_discount that applies a discount if one is provided and returns the discounted total. For example, if we initialize a new shopping cart with a discount of 20% then our total should be discounted in the amount of 20%. So, if our total were $100, after the discount we only would owe $80.
 
-
-
+#If our shopping cart does not have an employee discount, then it should return a string saying: "Sorry, there is no discount to apply to your cart :("
