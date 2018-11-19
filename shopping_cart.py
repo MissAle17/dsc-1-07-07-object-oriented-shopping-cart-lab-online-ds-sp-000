@@ -60,9 +60,18 @@ class ShoppingCart:
             return total_discount
         else:
             return print("Sorry, there is no discount to apply to your cart :(")
-    
-#           if self.employee_discount:
- #           discount = self.employee_discount/100
-##            return disc_total Now, let's define an instance method called apply_discount that applies a discount if one is provided and returns the discounted total. For example, if we initialize a new shopping cart with a discount of 20% then our total should be discounted in the amount of 20%. So, if our total were $100, after the discount we only would owe $80.
-
-#If our shopping cart does not have an employee discount, then it should return a string saying: "Sorry, there is no discount to apply to your cart :("
+    def item_names(self):
+        all_items=[self.find_item(item, "name")for item in self.items]
+        return all_items
+    def void_last_item(self):
+        if self.items:
+            void = self.items.pop()
+        else: 
+            return print( "There are no items in your cart!")
+        self.total -= void['price']
+        
+        
+        
+        
+        
+        
